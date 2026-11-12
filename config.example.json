@@ -1,0 +1,13 @@
+{
+  "listen": "127.0.0.1:18081",
+  "allowed_clients": ["127.0.0.1/32", "::1/128"],
+  "allowed_domains": [
+    "playstation.com", "playstation.net", "sony.com", "sonyentertainmentnetwork.com",
+    "google.com", "googleapis.com", "gstatic.com", "connectivitycheck.android.com"
+  ],
+  "probe_mode": "forward",
+  "upstream": "",
+  "dial_timeout_seconds": 10,
+  "idle_timeout_seconds": 300,
+  "max_connections": 64
+}
