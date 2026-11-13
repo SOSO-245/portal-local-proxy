@@ -12,6 +12,7 @@ Portal Local Proxy 是运行在 OpenWrt 旁路由上的独立 HTTP / HTTPS CONNE
 
 ## 从哪里开始
 
+- [下载 ARM64 OpenWrt 安装包](https://github.com/SOSO-245/portal-local-proxy/releases/tag/v0.1.0)：在 Assets 中下载核心安装包和 SHA-256 校验文件。
 - [安装与配置](Install.md)：本地试运行、OpenWrt 首装、掌机设置和回退。
 - [故障排查](Troubleshooting.md)：区分代理拒绝、上游故障、PSN 登录和远程游玩。
 - [安全与兼容范围](Security.md)：局域网限制、诊断边界与问题反馈。

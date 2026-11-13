@@ -34,21 +34,40 @@ go build -trimpath -o bin/portal-local-proxy .
 
 要求旁路由为 `aarch64`，使用 OpenWrt `procd`，且已有 `nobody` 用户。先确认 `18081` 未被占用、掌机可访问旁路由 LAN 地址。本安装器仅用于首次安装，发现已有安装会拒绝覆盖。
 
-从已脱敏的公开源码目录构建。构建机需要 Go、Python 3 和 POSIX shell；不要使用来源不明或包含个人运行记录的旧压缩包。
+### 下载并校验
+
+先在旁路由运行 `uname -m`，确认输出是 `aarch64`。然后在电脑打开 [v0.1.0 Releases](https://github.com/SOSO-245/portal-local-proxy/releases/tag/v0.1.0)，从 Assets 下载：
+
+- `portal-local-proxy-openwrt-arm64.tar.gz`
+- `portal-local-proxy-openwrt-arm64.tar.gz.sha256`
+
+在下载目录校验，看到 `OK` 才继续。Linux/OpenWrt 用 `sha256sum`，macOS 用 `shasum`，二选一：
 
 ```sh
-sh build.sh
+# Linux / OpenWrt
+sha256sum -c portal-local-proxy-openwrt-arm64.tar.gz.sha256
+# macOS
+shasum -a 256 -c portal-local-proxy-openwrt-arm64.tar.gz.sha256
 ```
 
-将生成的 `release/portal-local-proxy-openwrt-arm64.tar.gz` 与自己准备的配置放到设备上，解包后在旁路由终端执行。下列路径按实际解包位置调整：
+校验失败时不要执行安装脚本。校验文件用于检查传输完整性，不代替从官方项目仓库获取文件。GitHub 自动提供的 Source code 压缩包不是可直接安装的 ARM64 包。
+
+### 解压并首次安装
+
+将已校验的安装包和自己准备的配置上传到旁路由 `/tmp`（配置命名为 `portal-config.json`），以管理员身份在旁路由终端执行：
 
 ```sh
-sh /tmp/portal-local-proxy/install-openwrt.sh /tmp/portal-config.json
+cd /tmp
+tar -xzf portal-local-proxy-openwrt-arm64.tar.gz
+cd portal-local-proxy
+sh install-openwrt.sh /tmp/portal-config.json
 /etc/init.d/portal-local-proxy status
 logread -e portal-local-proxy
 ```
 
 安装器检查包内校验和及配置，启动成功才开启自启动。不改网关、DNS、无线或防火墙，不安装上游代理。如果包通过网络取得，包内校验和只能检错，仍需从可信来源取得包。
+
+需要自行构建时，可在公开源码目录用 Go、Python 3 和 POSIX shell 执行 `sh build.sh`，生成 `release/portal-local-proxy-openwrt-arm64.tar.gz`。
 
 ## 4. 配置掌机并验证
 

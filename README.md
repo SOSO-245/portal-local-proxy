@@ -10,6 +10,8 @@ Portal Local Proxy 是运行在 OpenWrt 旁路由上的独立 HTTP / HTTPS CONNE
 
 ## 快速检查
 
+ARM64 OpenWrt 安装包与 SHA-256 校验文件见 [GitHub Releases](https://github.com/SOSO-245/portal-local-proxy/releases/tag/v0.1.0)。按 [安装指南](docs/wiki/Install.md) 校验、解压并首次安装，无需在旁路由上编译。
+
 使用 Go 1.24 或更新版本。核心程序没有第三方 Go 依赖。
 
 ```sh
@@ -19,7 +21,7 @@ go run . -config config.example.json -check
 
 安装、回退与排障见 [GitHub Wiki](https://github.com/SOSO-245/portal-local-proxy/wiki)，也可直接阅读仓库内的 [文档](docs/wiki/Home.md)。仅在可信局域网使用，不要将监听端口暴露到公网。
 
-本仓库首发仅包含核心代理与 ARM64 OpenWrt 首次安装脚本。没有 LuCI 界面、抓包工具或历史安装包。
+本仓库和发布包仅包含核心代理相关内容。没有 LuCI 界面、抓包工具或历史安装包。
 
 ## 许可证
 
